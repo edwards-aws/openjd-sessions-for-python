@@ -670,7 +670,7 @@ class TestSessionRunTask_2023_09:  # noqa: N801
         return StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Foo }}")],
                 )
             ),
@@ -745,7 +745,7 @@ class TestSessionRunTask_2023_09:  # noqa: N801
         step_script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Foo }}")],
                 )
             ),
@@ -802,7 +802,7 @@ class TestSessionRunTask_2023_09:  # noqa: N801
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                 )
             ),
@@ -829,7 +829,7 @@ class TestSessionRunTask_2023_09:  # noqa: N801
         step_script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Foo }}")],
                 )
             ),
@@ -861,7 +861,7 @@ class TestSessionRunTask_2023_09:  # noqa: N801
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Foo }}")],
                 )
             ),
@@ -938,7 +938,7 @@ class TestSessionCancel:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Foo }}")],
                 )
             ),
@@ -1002,7 +1002,7 @@ class TestSessionCancel:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Foo }}")],
                 )
             ),
@@ -1055,7 +1055,7 @@ def _make_environment(
             actions=EnvironmentActions_2023_09(
                 onEnter=(
                     Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                     if enter_script
@@ -1063,7 +1063,7 @@ def _make_environment(
                 ),
                 onExit=(
                     Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                     if exit_script
@@ -1099,7 +1099,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1141,7 +1141,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1199,7 +1199,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                     )
                 ),
@@ -1226,7 +1226,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
         script = EnvironmentScript_2023_09(
             actions=EnvironmentActions_2023_09(
                 onEnter=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                 )
             ),
@@ -1260,7 +1260,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                     )
                 ),
@@ -1288,7 +1288,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1324,7 +1324,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1359,7 +1359,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                     )
                 ),
@@ -1409,7 +1409,7 @@ class TestSessionEnterEnvironment_2023_09:  # noqa: N801
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1473,7 +1473,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1517,7 +1517,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1573,7 +1573,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                     )
                 ),
@@ -1601,7 +1601,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                     )
                 ),
@@ -1627,7 +1627,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1665,7 +1665,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Foo }}")],
                     )
                 ),
@@ -1702,7 +1702,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("-c"), ArgString_2023_09("print('hi')")],
                     )
                 ),
@@ -1801,7 +1801,7 @@ class TestSessionExitEnvironment_2023_09:  # noqa: N801
         step_script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Foo }}")],
                 )
             ),
@@ -2031,7 +2031,7 @@ class TestPathMapping_v2023_09:  # noqa: N801
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Script }}")],
                 )
             ),
@@ -2081,7 +2081,7 @@ class TestPathMapping_v2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Script }}")],
                     )
                 ),
@@ -2131,7 +2131,7 @@ class TestPathMapping_v2023_09:  # noqa: N801
             EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Script }}")],
                     )
                 ),
@@ -2511,7 +2511,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             ],
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[ArgString_2023_09("{{ Task.File.Run }}")],
                 )
             ),
@@ -2619,7 +2619,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
                 ],
                 actions=EnvironmentActions_2023_09(
                     onExit=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[ArgString_2023_09("{{ Env.File.Run }}")],
                     )
                 ),
@@ -2663,7 +2663,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_env: FOO=FOO-value')"),
@@ -2705,7 +2705,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("import json; print('openjd_env: \"FOO=12\\\\n34')"),
@@ -2740,7 +2740,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_env: \"FOO=12\\\\n34\"')"),
@@ -2753,7 +2753,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[
                         ArgString_2023_09("-c"),
                         ArgString_2023_09(
@@ -2796,7 +2796,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_env: FOO=FOO-value')"),
@@ -2840,7 +2840,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_env: \"FOO=\"')"),
@@ -2879,7 +2879,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_env: FOO=')"),
@@ -2918,7 +2918,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_env: FOO')"),
@@ -2992,7 +2992,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_unset_env: FOO')"),
@@ -3034,7 +3034,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_redacted_env: PASSWORD=secret123')"),
@@ -3048,7 +3048,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[
                         ArgString_2023_09("-c"),
                         ArgString_2023_09(
@@ -3098,7 +3098,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_redacted_env: API_KEY=abc123def456')"),
@@ -3112,7 +3112,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[
                         ArgString_2023_09("-c"),
                         ArgString_2023_09("import os; print(f'API_KEY={os.environ[\"API_KEY\"]}')"),
@@ -3193,7 +3193,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_redacted_env: TOKEN=secret-token')"),
@@ -3208,7 +3208,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[
                         ArgString_2023_09("-c"),
                         ArgString_2023_09("import os; print(f'TOKEN={os.environ[\"TOKEN\"]}')"),
@@ -3254,7 +3254,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09("print('openjd_redacted_env: PASSWORD=secret123')"),
@@ -3268,7 +3268,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[
                         ArgString_2023_09("-c"),
                         ArgString_2023_09(
@@ -3321,7 +3321,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
             script=EnvironmentScript_2023_09(
                 actions=EnvironmentActions_2023_09(
                     onEnter=Action_2023_09(
-                        command=CommandString_2023_09(sys.executable),
+                        command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                         args=[
                             ArgString_2023_09("-c"),
                             ArgString_2023_09(
@@ -3337,7 +3337,7 @@ class TestEnvironmentVariablesInTasks_2023_09:
         script = StepScript_2023_09(
             actions=StepActions_2023_09(
                 onRun=Action_2023_09(
-                    command=CommandString_2023_09(sys.executable),
+                    command=CommandString_2023_09(sys.executable.lower().replace("pythonservice.exe", "python.exe")),
                     args=[
                         ArgString_2023_09("-c"),
                         ArgString_2023_09(

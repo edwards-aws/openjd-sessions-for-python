@@ -48,7 +48,7 @@ class TestLoggingSubprocessSameUser:
         logger = build_logger(queue_handler)
         subproc = LoggingSubprocess(
             logger=logger,
-            args=[sys.executable, "-c", 'print("Test")'],
+            args=[sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", 'print("Test")'],
         )
 
         # THEN
@@ -67,7 +67,7 @@ class TestLoggingSubprocessSameUser:
         message = "this is 'output'"
         subproc = LoggingSubprocess(
             logger=logger,
-            args=[sys.executable, "-c", f'import sys; print("{message}"); sys.exit({exitcode})'],
+            args=[sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", f'import sys; print("{message}"); sys.exit({exitcode})'],
         )
 
         # WHEN
@@ -98,7 +98,7 @@ class TestLoggingSubprocessSameUser:
         message = "this is output"
         subproc = LoggingSubprocess(
             logger=logger,
-            args=[sys.executable, "-c", f'import sys; print("{message}"); sys.exit({exitcode})'],
+            args=[sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", f'import sys; print("{message}"); sys.exit({exitcode})'],
             user=user,
         )
 
@@ -169,7 +169,7 @@ class TestLoggingSubprocessSameUser:
         message = "this is output"
         subproc = LoggingSubprocess(
             logger=logger,
-            args=[sys.executable, "-c", f'import sys; print("{message}", file=sys.stderr)'],
+            args=[sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", f'import sys; print("{message}", file=sys.stderr)'],
         )
 
         # WHEN
@@ -186,7 +186,7 @@ class TestLoggingSubprocessSameUser:
         logger = build_logger(queue_handler)
         subproc = LoggingSubprocess(
             logger=logger,
-            args=[sys.executable, "-c", "print('Test')"],
+            args=[sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", "print('Test')"],
         )
 
         # WHEN
@@ -205,7 +205,7 @@ class TestLoggingSubprocessSameUser:
         subproc = LoggingSubprocess(
             logger=logger,
             args=[
-                sys.executable,
+                sys.executable.lower().replace("pythonservice.exe", "python.exe"),
                 "-c",
                 "print('This is just a test')",
             ],
@@ -228,7 +228,7 @@ class TestLoggingSubprocessSameUser:
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
         subproc = LoggingSubprocess(
             logger=logger,
-            args=[sys.executable, str(python_app_loc)],
+            args=[sys.executable.lower().replace("pythonservice.exe", "python.exe"), str(python_app_loc)],
         )
         all_messages = []
 
@@ -269,7 +269,7 @@ class TestLoggingSubprocessSameUser:
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
         subproc = LoggingSubprocess(
             logger=logger,
-            args=[sys.executable, str(python_app_loc)],
+            args=[sys.executable.lower().replace("pythonservice.exe", "python.exe"), str(python_app_loc)],
         )
         all_messages = []
 
@@ -316,14 +316,14 @@ class TestLoggingSubprocessSameUser:
         # GIVEN
         logger = build_logger(queue_handler)
         script_loc = (Path(__file__).parent / "support_files" / "run_app_20s_run.py").resolve()
-        args = [sys.executable, str(script_loc)]
+        args = [sys.executable.lower().replace("pythonservice.exe", "python.exe"), str(script_loc)]
         subproc = LoggingSubprocess(logger=logger, args=args)
         children = []
         all_messages = []
         # Note: This is the number of *CHILD* processes of the main process that we start.
         #  The total number of processes in flight will be this plus one.
 
-        # On Posix and on Windows not in a virutal environment:
+        # On Posix and on Windows not in a virtual environment:
         # Process tree: python -> python
         # Children: python
         expected_num_child_procs = 1
@@ -334,6 +334,11 @@ class TestLoggingSubprocessSameUser:
             # Process tree: conhost -> python -> python -> python
             # Children: python, python, python
             expected_num_child_procs = 3
+        elif is_windows() and are_tests_in_windows_session_0():
+            # When running as a service there's an additional process that gets added
+            # Process tree: conhost -> python -> python
+            # Children: python, python
+            expected_num_child_procs = 2
 
         def end_proc():
             subproc.wait_until_started()
@@ -396,7 +401,7 @@ class TestLoggingSubprocessSameUser:
         subproc = LoggingSubprocess(
             logger=logger,
             args=[
-                sys.executable,
+                sys.executable.lower().replace("pythonservice.exe", "python.exe"),
                 "-c",
                 f"""import sys
 print("a" * {expected_max_line_length}, end="")
@@ -460,7 +465,7 @@ sys.exit(0)
         subproc = LoggingSubprocess(
             logger=logger,
             args=[
-                sys.executable,
+                sys.executable.lower().replace("pythonservice.exe", "python.exe"),
                 "-c",
                 f'import subprocess;process = subprocess.Popen({command}, encoding="utf-8")',
             ],
@@ -896,7 +901,6 @@ foreach ($envVar in $allEnvVars) {
         windows_user: WindowsSessionUser,
     ) -> None:
         # Make sure that process is sent a notification signal
-
         # GIVEN
         logger = build_logger(queue_handler)
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
@@ -1005,10 +1009,6 @@ foreach ($envVar in $allEnvVars) {
         all_messages = []
         # conhost, python
         expected_num_child_procs: int = 2
-        if are_tests_in_windows_session_0():
-            # Session 0 doesn't get the conhost process, so just:
-            # python
-            expected_num_child_procs = 1
 
         def end_proc():
             subproc.wait_until_started()

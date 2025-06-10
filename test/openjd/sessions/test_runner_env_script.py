@@ -84,7 +84,7 @@ class TestEnvironmentScriptRunner:
 
         # GIVEN
         script = EnvironmentScript_2023_09(actions=env_actions)
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         logger = build_logger(queue_handler)
         runner = EnvironmentScriptRunner(
             logger=logger,
@@ -144,7 +144,7 @@ class TestEnvironmentScriptRunner:
 
         # GIVEN
         script = EnvironmentScript_2023_09(actions=env_actions)
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         logger = build_logger(queue_handler)
         callback = MagicMock()
         runner = EnvironmentScriptRunner(
@@ -175,7 +175,7 @@ class TestEnvironmentScriptRunner:
         # a) Don't explode;
         # b) Don't run anything; and
         # c) Invoke the callback
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         logger = build_logger(queue_handler)
         callbackOnEnter = MagicMock()
         callbackOnExit = MagicMock()
@@ -249,7 +249,7 @@ class TestEnvironmentScriptRunner:
                 )
             ],
         )
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         logger = build_logger(queue_handler)
         runner = EnvironmentScriptRunner(
             logger=logger,
@@ -319,7 +319,7 @@ class TestEnvironmentScriptRunner:
                 )
             ],
         )
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         callback = MagicMock()
         runner = EnvironmentScriptRunner(
             logger=MagicMock(),
@@ -395,7 +395,7 @@ class TestEnvironmentScriptRunner:
                     )
                 )
 
-                symtab = SymbolTable(source={"Task.Command": sys.executable})
+                symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
                 runner = EnvironmentScriptRunner(
                     logger=MagicMock(),
                     session_working_directory=tmp_path,
@@ -439,7 +439,7 @@ class TestEnvironmentScriptRunner:
             )
         )
 
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         runner = EnvironmentScriptRunner(
             logger=MagicMock(),
             session_working_directory=tmp_path,
@@ -481,7 +481,7 @@ class TestEnvironmentScriptRunner:
             )
         )
 
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         runner = EnvironmentScriptRunner(
             logger=MagicMock(),
             session_working_directory=tmp_path,

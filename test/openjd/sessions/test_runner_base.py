@@ -128,7 +128,7 @@ class TestScriptRunnerBase:
             logger=MagicMock(), session_working_directory=tmp_path, callback=callback
         ) as runner:
             # WHEN
-            runner._run([sys.executable, "-c", "import time; time.sleep(0.25)"])
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", "import time; time.sleep(0.25)"])
 
             # THEN
             assert runner.state == ScriptRunnerState.RUNNING
@@ -173,7 +173,7 @@ class TestScriptRunnerBase:
             logger=logger, session_working_directory=tmp_path, startup_directory=tmp_path
         ) as runner:
             # WHEN
-            runner._run([sys.executable, "-c", "import os; print(os.getcwd())"])
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", "import os; print(os.getcwd())"])
             # Wait until the process exits.
             while runner.state == ScriptRunnerState.RUNNING:
                 time.sleep(0.1)
@@ -189,7 +189,7 @@ class TestScriptRunnerBase:
         # GIVEN
         with TerminatingRunner(logger=MagicMock(), session_working_directory=tmp_path) as runner:
             # WHEN
-            runner._run([sys.executable, "-c", "import sys; sys.exit(1)"])
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", "import sys; sys.exit(1)"])
 
             # THEN
             while runner.state == ScriptRunnerState.RUNNING:
@@ -256,7 +256,7 @@ class TestScriptRunnerBase:
             # WHEN
             runner._run(
                 [
-                    sys.executable,
+                    sys.executable.lower().replace("pythonservice.exe", "python.exe"),
                     "-c",
                     r"import os;print(*(f'{k} = {v}' for k,v in os.environ.items()), sep='\n')",
                 ]
@@ -297,8 +297,8 @@ class TestScriptRunnerBase:
             # WHEN
             runner._run(
                 [
-                    # Note: Intentionally not `sys.executable`. Reasons:
-                    #  1) This is a cross-account command, and sys.executable may be in a user-specific venv
+                    # Note: Intentionally not `sys.executable.lower().replace("pythonservice.exe", "python.exe")`. Reasons:
+                    #  1) This is a cross-account command, and sys.executable.lower().replace("pythonservice.exe", "python.exe") may be in a user-specific venv
                     #  2) This test is, generally, intended to be run in a docker container where the system
                     #     python is the correct version that we want to run under.
                     "python",
@@ -348,8 +348,8 @@ class TestScriptRunnerBase:
             # WHEN
             runner._run(
                 [
-                    # Note: Intentionally not `sys.executable`. Reasons:
-                    #  1) This is a cross-account command, and sys.executable may be in a user-specific venv
+                    # Note: Intentionally not `sys.executable.lower().replace("pythonservice.exe", "python.exe")`. Reasons:
+                    #  1) This is a cross-account command, and sys.executable.lower().replace("pythonservice.exe", "python.exe") may be in a user-specific venv
                     #  2) This test is, generally, intended to be run in a docker container where the system
                     #     python is the correct version that we want to run under.
                     "python",
@@ -467,8 +467,8 @@ class TestScriptRunnerBase:
             # WHEN
             runner._run(
                 [
-                    # Note: Intentionally not `sys.executable`. Reasons:
-                    #  1) This is a cross-account command, and sys.executable may be in a user-specific venv
+                    # Note: Intentionally not `sys.executable.lower().replace("pythonservice.exe", "python.exe")`. Reasons:
+                    #  1) This is a cross-account command, and sys.executable.lower().replace("pythonservice.exe", "python.exe") may be in a user-specific venv
                     #  2) This test is, generally, intended to be run in a docker container where the system
                     #     python is the correct version that we want to run under.
                     "python",
@@ -518,8 +518,8 @@ class TestScriptRunnerBase:
             # WHEN
             runner._run(
                 [
-                    # Note: Intentionally not `sys.executable`. Reasons:
-                    #  1) This is a cross-account command, and sys.executable may be in a user-specific venv
+                    # Note: Intentionally not `sys.executable.lower().replace("pythonservice.exe", "python.exe")`. Reasons:
+                    #  1) This is a cross-account command, and sys.executable.lower().replace("pythonservice.exe", "python.exe") may be in a user-specific venv
                     #  2) This test is, generally, intended to be run in a docker container where the system
                     #     python is the correct version that we want to run under.
                     "python",
@@ -570,8 +570,8 @@ class TestScriptRunnerBase:
         ) as runner:
             # WHEN
             py_script = f"import os; v=os.environ.get('{var_name}'); print('NOT_PRESENT' if v is None else v)"
-            # Use the default 'python' rather than 'sys.executable' since we typically do not have access to
-            # sys.executable when running with impersonation since it's in a hatch environment for the local user.
+            # Use the default 'python' rather than 'sys.executable.lower().replace("pythonservice.exe", "python.exe")' since we typically do not have access to
+            # sys.executable.lower().replace("pythonservice.exe", "python.exe") when running with impersonation since it's in a hatch environment for the local user.
             runner._run(["python", "-c", py_script])
 
             # THEN
@@ -598,11 +598,11 @@ class TestScriptRunnerBase:
             logger=MagicMock(), session_working_directory=tmp_path, callback=callback
         ) as runner:
             # WHEN
-            runner._run([sys.executable, "-c", "print('hello')"])
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", "print('hello')"])
 
             # THEN
             with pytest.raises(RuntimeError):
-                runner._run([sys.executable, "-c", "print('hello')"])
+                runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), "-c", "print('hello')"])
 
     @pytest.mark.usefixtures("message_queue", "queue_handler")
     def test_run_action(
@@ -623,7 +623,7 @@ class TestScriptRunnerBase:
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
         symtab = SymbolTable(
             source={
-                "Task.PythonInterpreter": sys.executable,
+                "Task.PythonInterpreter": sys.executable.lower().replace("pythonservice.exe", "python.exe"),
                 "Task.ScriptFile": str(python_app_loc),
             }
         )
@@ -683,7 +683,7 @@ class TestScriptRunnerBase:
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
         symtab = SymbolTable(
             source={
-                "Task.PythonInterpreter": sys.executable,
+                "Task.PythonInterpreter": sys.executable.lower().replace("pythonservice.exe", "python.exe"),
                 "Task.ScriptFile": str(python_app_loc),
             }
         )
@@ -755,7 +755,7 @@ class TestScriptRunnerBase:
             logger=logger, session_working_directory=tmp_path, callback=callback
         ) as runner:
             python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
-            runner._run([sys.executable, str(python_app_loc)])
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), str(python_app_loc)])
 
             # WHEN
             runner.cancel()
@@ -789,7 +789,7 @@ class TestScriptRunnerBase:
             python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
 
             # WHEN
-            runner._run([sys.executable, str(python_app_loc)], time_limit=timedelta(seconds=1))
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), str(python_app_loc)], time_limit=timedelta(seconds=1))
 
             # THEN
             # Wait until the process exits. We'll be in CANCELING state between when the timeout is reached
@@ -818,7 +818,7 @@ class TestScriptRunnerBase:
             python_app_loc = (
                 Path(__file__).parent / "support_files" / "app_20s_run_ignore_signal.py"
             ).resolve()
-            runner._run([sys.executable, str(python_app_loc)])
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), str(python_app_loc)])
 
             # WHEN
             secs = 2 if not is_windows() else 5
@@ -971,7 +971,7 @@ class TestScriptRunnerBase:
             python_app_loc = (
                 Path(__file__).parent / "support_files" / "app_20s_run_ignore_signal.py"
             ).resolve()
-            runner._run([sys.executable, str(python_app_loc)])
+            runner._run([sys.executable.lower().replace("pythonservice.exe", "python.exe"), str(python_app_loc)])
 
             # WHEN
             secs = 2 if not is_windows() else 5

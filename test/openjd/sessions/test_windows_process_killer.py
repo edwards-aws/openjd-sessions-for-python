@@ -24,7 +24,7 @@ class TestWindowsProcessKiller:
         # GIVEN
         logger = build_logger(queue_handler)
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
-        process = Popen([sys.executable, python_app_loc], stdout=subprocess.PIPE, text=True)
+        process = Popen([sys.executable.lower().replace("pythonservice.exe", "python.exe"), python_app_loc], stdout=subprocess.PIPE, text=True)
 
         # When
         # Give a few seconds for running the python script
@@ -42,7 +42,7 @@ class TestWindowsProcessKiller:
         # GIVEN
         logger = build_logger(queue_handler)
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
-        process = Popen([sys.executable, python_app_loc], stdout=subprocess.PIPE, text=True)
+        process = Popen([sys.executable.lower().replace("pythonservice.exe", "python.exe"), python_app_loc], stdout=subprocess.PIPE, text=True)
 
         # When
         # Give a few seconds for running the python script
@@ -61,7 +61,7 @@ class TestWindowsProcessKiller:
         # GIVEN
         logger = build_logger(queue_handler)
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
-        process = Popen([sys.executable, python_app_loc], stdout=subprocess.PIPE, text=True)
+        process = Popen([sys.executable.lower().replace("pythonservice.exe", "python.exe"), python_app_loc], stdout=subprocess.PIPE, text=True)
 
         # When
         # Give a few seconds for running the python script
@@ -76,7 +76,7 @@ class TestWindowsProcessKiller:
         # GIVEN
         logger = build_logger(queue_handler)
         python_app_loc = (Path(__file__).parent / "support_files" / "app_20s_run.py").resolve()
-        process = Popen([sys.executable, python_app_loc], stdout=subprocess.PIPE, text=True)
+        process = Popen([sys.executable.lower().replace("pythonservice.exe", "python.exe"), python_app_loc], stdout=subprocess.PIPE, text=True)
 
         # When
         # Give a few seconds for running the python script

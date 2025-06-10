@@ -2,6 +2,7 @@
 
 import socket
 import logging
+import io
 from threading import Event
 from typing import Optional
 
@@ -15,6 +16,7 @@ import argparse
 import shlex
 import win32con
 import win32api
+import pytest
 from getpass import getpass
 
 
@@ -54,32 +56,43 @@ class OpenJDSessionsForPythonTestService(win32serviceutil.ServiceFramework):
         )
         code_location = os.environ["CODE_LOCATION"]
         pytest_args = os.environ.get("PYTEST_ARGS", None)
+        log_file_name = os.path.join(code_location, "test.log")
 
-        args = ["pytest", os.path.join(code_location, "test")]
+        args = [os.path.join(code_location, "test"), "-p", "no:xdist"]
 
         if pytest_args:
             args.extend(shlex.split(pytest_args, posix=False))
 
-        logging.basicConfig(
-            filename=os.path.join(code_location, "test.log"),
-            encoding="utf-8",
-            level=logging.INFO,
-            filemode="w",
-        )
-        process = subprocess.Popen(
-            args,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            cwd=code_location,
-        )
+        # logging.basicConfig(
+        #     filename=log_file_name,
+        #     encoding="utf-8",
+        #     level=logging.INFO,
+        #     filemode="w",
+        # )
+        # process = subprocess.Popen(
+        #     args,
+        #     stdout=subprocess.PIPE,
+        #     stderr=subprocess.STDOUT,
+        #     text=True,
+        #     cwd=code_location,
+        #     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_CONSOLE,
+        # )
 
-        while True:
-            output = process.stdout.readline()
-            if not output and process.poll() is not None:
-                break
+        with open(log_file_name, mode="w") as f:
+            sys.stdout = f
+            sys.stderr = f
 
-            logger.info(output.strip())
+            ret = pytest.main(args)
+
+        # while True:
+        #     output = process.stdout.readline()
+        #     if not output and process.poll() is not None:
+        #         break
+
+        #     logger.info(output.strip())
+
+        # logger.info(sys.stdout.getvalue())
+        # logger.error(sys.stderr.getvalue())
 
         servicemanager.LogMsg(
             servicemanager.EVENTLOG_INFORMATION_TYPE,

@@ -74,7 +74,7 @@ class TestStepScriptRunner:
                 )
             )
         )
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         logger = build_logger(queue_handler)
         runner = StepScriptRunner(
             logger=logger,
@@ -118,7 +118,7 @@ class TestStepScriptRunner:
                 )
             ],
         )
-        symtab = SymbolTable(source={"Task.Command": sys.executable})
+        symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
         logger = build_logger(queue_handler)
         runner = StepScriptRunner(
             logger=logger,
@@ -262,7 +262,7 @@ class TestStepScriptRunner:
                         )
                     )
                 )
-                symtab = SymbolTable(source={"Task.Command": sys.executable})
+                symtab = SymbolTable(source={"Task.Command": sys.executable.lower().replace("pythonservice.exe", "python.exe")})
                 runner = StepScriptRunner(
                     logger=MagicMock(),
                     session_working_directory=tmp_path,
